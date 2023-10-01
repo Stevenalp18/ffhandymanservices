@@ -1,0 +1,126 @@
+---
+import { Image } from "astro:assets";
+import deckImage from "../assets/deck-work-1.jpeg";
+import basementFloor from "../assets/basement-floor-1.jpeg";
+import bathroomRenovation from "../assets/bathroom-renovation-1.jpeg";
+import kitchenRenovation from "../assets/kitchen-remodel-1.jpeg";
+import patioPainting from "../assets/patio-paint.jpeg";
+---
+
+<section>
+  <div class="p-8 lg:w-3/4 mx-auto flex flex-col gap-6">
+    <div>
+      <h2 class="text-4xl font-['Young_Serif'] text-center">Our Services!</h2>
+      <p class="text-center text-neutral-600">Check what we have to offer!</p>
+    </div>
+    <div class="flex gap-4 flex-col md:flex-row flex-wrap">
+      <!-- Break -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">Decks</h3>
+          <ul class="text-xl">
+            <li class="overline">Staining</li>
+            <li>Powerwashing</li>
+            <li>Sealing/Resealing</li>
+          </ul>
+        </div>
+        <Image
+          src={deckImage}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">Floors</h3>
+          <ul class="text-xl">
+            <li class="overline">Staining</li>
+            <li>Hardwood Floors</li>
+            <li>Carpets</li>
+          </ul>
+        </div>
+        <Image
+          src={basementFloor}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">Bathrooms</h3>
+          <ul class="text-xl">
+            <li class="overline">Renovation</li>
+            <li>Installation</li>
+            <li>Tiles</li>
+          </ul>
+        </div>
+        <Image
+          src={bathroomRenovation}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">Kitchens</h3>
+          <ul class="text-xl">
+            <li class="overline">Installation</li>
+            <li>Renovation</li>
+            <li>Backsplash</li>
+            <li>Cabinets</li>
+          </ul>
+        </div>
+        <Image
+          src={kitchenRenovation}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">Painting</h3>
+          <ul class="text-xl">
+            <li class="overline">Interior Painting</li>
+            <li>Exterior Painting</li>
+            <li>Floor/Garage</li>
+          </ul>
+        </div>
+        <Image
+          src={patioPainting}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+      <!--  -->
+      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
+        <div class="w-full text-left md:text-center my-auto">
+          <h3 class="text-2xl font-['Young_Serif']">More</h3>
+          <ul class="text-xl">
+            <li class="overline">Contact us!</li>
+          </ul>
+        </div>
+        <Image
+          src={deckImage}
+          alt=""
+          width="300"
+          height="300"
+          class="rounded-xl"
+        />
+      </div>
+    </div>
+  </div>
+</section>
