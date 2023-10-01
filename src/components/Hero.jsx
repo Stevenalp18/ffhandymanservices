@@ -24,11 +24,11 @@ export default function Hero() {
         <div className="relative w-full lg:h-[800px] md:h-[700px] h-screen pb-1 border-2">
           <img
             src={currentImage.url}
-            alt={currentImage.alt}
+            alt={IMAGE_CAROUSEL[count].image.alt}
             className="w-full h-full object-cover blur-[2px]"
           />
           <div className="absolute left-0 right-0 top-0 bottom-40 m-auto w-4/5 md:w-3/5 lg:w-2/5 text-center flex justify-center align-middle">
-            <div className=" my-auto rounded-xl px-6 pb-6">
+            <div className="my-auto rounded-xl px-6 pb-6">
               <div className="text-center">
                 <img
                   src="src/assets/logo-black.svg"

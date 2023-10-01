@@ -17,7 +17,7 @@ export const IMAGE_CAROUSEL = [
     id: 2,
     image: {
       url: "./src/assets/kitchen-remodel-2.jpeg",
-      alt: "Changed Coutertop and Backsplash in Kitchen",
+      alt: "Changed Countertop and Backsplash in Kitchen",
     },
   },
   {
@@ -49,10 +49,10 @@ export const IMAGE_CAROUSEL = [
     },
   },
   {
-    id: 6,
+    id: 7,
     image: {
       url: "./src/assets/deck-work-1.jpeg",
-      alt: "Deck cleaned, prepped, power washed and stained",
+      alt: "Deck cleaned, prepped, power washed, and stained",
     },
   },
 ];
