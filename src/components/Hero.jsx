@@ -1,4 +1,4 @@
-import { IMAGE_CAROUSEL } from "../data/imageData";
+import { IMAGE_CAROUSEL } from "../data/imageData.js";
 import { useEffect, useState } from "react";
 
 export default function Hero() {
