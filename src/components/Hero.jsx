@@ -79,7 +79,7 @@ export default function Hero() {
 
   return (
     <>
-      <section>
+      <section className="z-0 pt-0 md:pt-20">
         <div className="relative w-full lg:h-[800px] md:h-[700px] h-screen pb-1 border-2">
           <img
             src={currentImage.url}
@@ -101,20 +101,6 @@ export default function Hero() {
                 <p className="text-3xl text-black font-['Young_Serif']">
                   DC | MD | VA
                 </p>
-              </div>
-              <div className="flex gap-4 justify-center mt-4 font-['Young_Serif']">
-                <a
-                  href=""
-                  className="py-3 px-4 rounded-xl bg-black/80 text-white text-lg"
-                >
-                  Contact Us
-                </a>
-                <a
-                  href=""
-                  className="py-3 px-4 rounded-xl bg-black/80 text-white text-lg"
-                >
-                  Services
-                </a>
               </div>
               {/* <div className="flex justify-center gap-4">
                 <button

@@ -3,14 +3,31 @@ import { Image } from "astro:assets";
 import logo from "/public/assets/logo-black.svg";
 ---
 
-<header class="flex justify-between px-4 lg:px-8 border-b">
+<header
+  class="fixed top-0 z-50 bg-white w-full flex justify-between px-4 lg:px-8 border-b"
+>
   <a href="/"><Image src={logo} alt="logo" width="80" height="80" /></a>
   <nav class="my-auto">
     <ul class="flex gap-4 lg:text-2xl text-xl font-sans">
-      <li><a href="/">Home</a></li>
-      <li><a href="/">About</a></li>
-      <li><a href="/">Services</a></li>
-      <li><a href="/">Contact</a></li>
+      <li>
+        <a href="/#" class="hover:text-neutral-500 active:text-neutral-200"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a href="/#about" class="hover:text-neutral-500 active:text-neutral-200"
+          >About</a>
+      </li>
+      <li>
+        <a
+          href="/#services"
+          class="hover:text-neutral-500 active:text-neutral-200">Services</a>
+      </li>
+      <li>
+        <a
+          href="/#contact"
+          class="hover:text-neutral-500 active:text-neutral-200">Contact</a>
+      </li>
     </ul>
   </nav>
 </header>
