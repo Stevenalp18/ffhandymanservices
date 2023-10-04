@@ -3,12 +3,16 @@ import { Image } from "astro:assets";
 import logo from "/public/assets/logo-black.svg";
 ---
 
+<script>
+  document.getElementById("navbar").addEventListener("click", () => {});
+</script>
+
 <header
   class="fixed top-0 z-50 bg-white w-full flex justify-between px-4 lg:px-8 border-b"
 >
   <a href="/"><Image src={logo} alt="logo" width="80" height="80" /></a>
   <nav class="my-auto">
-    <ul class="flex gap-4 lg:text-2xl text-xl font-sans">
+    <ul class="flex gap-4 text-xl font-sans hidden md:flex">
       <li>
         <a href="/#" class="hover:text-neutral-500 active:text-neutral-200"
           >Home</a
@@ -16,18 +20,63 @@ import logo from "/public/assets/logo-black.svg";
       </li>
       <li>
         <a href="/#about" class="hover:text-neutral-500 active:text-neutral-200"
-          >About</a>
+          >About</a
+        >
       </li>
       <li>
         <a
           href="/#services"
-          class="hover:text-neutral-500 active:text-neutral-200">Services</a>
+          class="hover:text-neutral-500 active:text-neutral-200">Services</a
+        >
       </li>
       <li>
         <a
           href="/#contact"
-          class="hover:text-neutral-500 active:text-neutral-200">Contact</a>
+          class="hover:text-neutral-500 active:text-neutral-200">Contact</a
+        >
       </li>
     </ul>
+    <!-- Dropdown below -->
+    <ul
+      id="navbar-dropdown"
+      class="absolute top-20 border w-full left-0 bg-white flex flex-col text-xl font-sans text-center"
+    >
+      <li class="w-fullborder-2">
+        <a
+          href="/#"
+          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
+          >Home</a
+        >
+      </li>
+      <li class="w-fullborder-2">
+        <a
+          href="/#about"
+          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
+          >About</a
+        >
+      </li>
+      <li class="w-fullborder-2">
+        <a
+          href="/#services"
+          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
+          >Services</a
+        >
+      </li>
+      <li class="w-fullborder-2">
+        <a
+          href="/#contact"
+          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
+          >Contact</a
+        >
+      </li>
+    </ul>
+    <div
+      id="navbar"
+      class="md:hidden flex flex-col gap-1.5 m-auto cursor-pointer"
+    >
+      <div class="border-b-2 w-6 border-black"></div>
+      <div class="border-b-2 w-6 border-black"></div>
+      <div class="border-b-2 w-6 border-black"></div>
+    </div>
   </nav>
 </header>
