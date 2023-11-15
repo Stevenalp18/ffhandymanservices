@@ -4,7 +4,9 @@ import logo from "/public/assets/logo-black.svg";
 ---
 
 <script>
-  document.getElementById("navbar").addEventListener("click", () => {});
+  document.getElementById("navbar").addEventListener("click", () => {
+    document.getElementById("navbar-dropdown").classList.toggle("hidden");
+  });
 </script>
 
 <header
@@ -39,7 +41,7 @@ import logo from "/public/assets/logo-black.svg";
     <!-- Dropdown below -->
     <ul
       id="navbar-dropdown"
-      class="absolute top-20 border w-full left-0 bg-white flex flex-col text-xl font-sans text-center"
+      class="absolute top-20 border w-full left-0 bg-white flex flex-col text-xl font-sans text-center md:hidden"
     >
       <li class="w-fullborder-2">
         <a
