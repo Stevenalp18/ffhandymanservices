@@ -2,15 +2,100 @@
 import Layout from "../layouts/Layout.astro";
 import Navbar from "../components/Navbar.astro";
 import ImageSection from "../components/gallery/ImageSection.astro";
+
+const galleryData = [
+  {
+    workLocation: "Interior",
+    images: [
+      { fileName: "basement-floor-1.jpeg", alt: "Basement floor work" },
+      { fileName: "interior-1.jpeg", alt: "Interior painting" },
+      { fileName: "interior-2.jpeg", alt: "Interior painting" },
+      { fileName: "interior-3.jpeg", alt: "Interior painting" },
+      { fileName: "interior-4.jpeg", alt: "Interior painting" },
+      { fileName: "interior-5.jpeg", alt: "Interior painting" },
+      { fileName: "interior-6.jpeg", alt: "Interior painting" },
+      { fileName: "interior-7.jpeg", alt: "Interior painting" },
+      { fileName: "interior-8.jpeg", alt: "Interior painting" },
+      { fileName: "interior-9.jpeg", alt: "Interior painting" },
+      { fileName: "interior-10.jpeg", alt: "Interior painting" },
+      { fileName: "interior-11.jpeg", alt: "Interior painting" },
+      { fileName: "interior-12.jpeg", alt: "Interior painting" },
+      { fileName: "interior-13.jpeg", alt: "Interior painting" },
+      { fileName: "bathroom-renovation-1.jpeg", alt: "Interior painting" },
+    ],
+  },
+  {
+    workLocation: "Exterior",
+    images: [
+      { fileName: "exterior-home-1.jpeg", alt: "Exterior Home Work" },
+      { fileName: "patio-paint.jpeg", alt: "Deck installation" },
+      { fileName: "exterior-1.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-1.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-2.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-3.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-4.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-5.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-6.jpeg", alt: "Exterior Home Work" },
+      { fileName: "deck-7.jpeg", alt: "Exterior Home Work" },
+    ],
+  },
+  {
+    workLocation: "Kitchen",
+    images: [
+      { fileName: "kitchen-remodel-1.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-remodel-2.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-remodel-3.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-1.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-2.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-3.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-4.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-5.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-6.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-7.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-8.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-9.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-10.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-11.jpeg", alt: "Deck installation" },
+      { fileName: "kitchen-12.jpeg", alt: "Deck installation" },
+    ],
+  },
+
+  {
+    workLocation: "Bathroom",
+    images: [
+      { fileName: "bathroom-renovation-1.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-1.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-2.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-3.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-4.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-5.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-6.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-7.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-8.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-9.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-10.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-11.jpeg", alt: "Deck installation" },
+      { fileName: "bathroom-12.jpeg", alt: "Deck installation" },
+    ],
+  },
+];
 ---
 
-<Layout title="Gallery" />
-<Navbar />
-<main class="border-2 mt-20">
-  <div class="w-full text-3xl pl-24 py-10 font-semibold"><h1>Gallery</h1></div>
-  <div class="w-full text-center">
-    <ImageSection workLocation="Interior Work" />
-    <ImageSection workLocation="Exterior Work" />
-    <ImageSection workLocation="Deck Work" />
-  </div>
-</main>
+<Layout title="Gallery">
+  <Navbar />
+  <main class="border-2 py-20">
+    <div class="w-full text-3xl pl-24 py-10 font-semibold">
+      <h1>Gallery</h1>
+    </div>
+    <div class="w-full text-center">
+      {
+        galleryData.map((section) => (
+          <ImageSection
+            workLocation={section.workLocation}
+            images={section.images}
+          />
+        ))
+      }
+    </div>
+  </main>
+</Layout>

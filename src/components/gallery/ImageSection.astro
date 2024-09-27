@@ -1,21 +1,26 @@
 ---
-import Image from "astro/components/Image.astro";
+import ImageInstance from "./ImageInstance.astro";
+
+interface ImageData {
+  fileName: string;
+  alt: string;
+}
 
 interface Props {
   workLocation: string;
+  images: ImageData[];
 }
 
-const { workLocation } = Astro.props;
-
-import imgSrcSample from "/public/assets/Image_Placeholder.svg";
+const { workLocation, images } = Astro.props;
 ---
 
-<div class="w-full text-center">
-  <div class="w-full pt-8 text-xl text-center">
-    <h2 class="border-b-2 w-fit mx-auto">{workLocation}</h2>
+<div class="px-6 mx-auto">
+  <h1 class="py-8 font-sans text-4xl">{workLocation}</h1>
+  <div class="flex justify-center gap-8 flex-wrap">
+    {
+      images.map((image) => (
+        <ImageInstance fileName={image.fileName} alt={image.alt} />
+      ))
+    }
   </div>
-  <div class="w-full pt-8 flex justify-center flex-wrap gap-12">
-    <Ib
-    
-</div>
 </div>

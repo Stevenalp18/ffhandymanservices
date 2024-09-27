@@ -16,11 +16,16 @@ import logo from "../../public/assets/logo-black.svg";
       <Image src={logo} alt="logo" width={200} height={200} class="mx-auto" />
     </div>
     <div class="md:w-1/2">
-      <form action="" class="flex flex-col gap-8">
+      <form
+        action="https://formsubmit.co/fernandopainting@hotmail.com"
+        method="POST"
+        class="flex flex-col gap-8"
+      >
         <label class="w-full" for=""
           ><input
             required
             type="text"
+            name="name"
             placeholder="Name"
             class="w-full rounded-sm p-2 bg-neutral-200"
           /></label
@@ -29,6 +34,7 @@ import logo from "../../public/assets/logo-black.svg";
           ><input
             placeholder="Email"
             type="email"
+            name="email"
             required
             class="w-full rounded-sm p-2 bg-neutral-200"
           /></label
@@ -36,6 +42,7 @@ import logo from "../../public/assets/logo-black.svg";
         <label class="w-full" for=""
           ><input
             type="tel"
+            name="telephone"
             placeholder="Phone"
             class="w-full rounded-sm p-2 bg-neutral-200"
           /></label
