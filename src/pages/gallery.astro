@@ -1,0 +1,16 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import ImageSection from "../components/gallery/ImageSection.astro";
+---
+
+<Layout title="Gallery" />
+<Navbar />
+<main class="border-2 mt-20">
+  <div class="w-full text-3xl pl-24 py-10 font-semibold"><h1>Gallery</h1></div>
+  <div class="w-full text-center">
+    <ImageSection workLocation="Interior Work" />
+    <ImageSection workLocation="Exterior Work" />
+    <ImageSection workLocation="Deck Work" />
+  </div>
+</main>
