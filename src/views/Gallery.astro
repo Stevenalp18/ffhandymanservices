@@ -1,0 +1,116 @@
+---
+import type { Lang } from "../i18n";
+import { t } from "../i18n";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import { photos, categories } from "../data/gallery";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const g = t(lang).gallery;
+const filters = [{ key: "all", label: g.all }, ...categories.map((c) => ({ key: c, label: g.categories[c] }))];
+---
+
+<Layout title={t(lang).meta.galleryTitle} lang={lang} page="gallery">
+  <Navbar lang={lang} page="gallery" />
+  <main id="main" class="pt-16">
+    <div class="max-w-page mx-auto px-4 md:px-6 pt-12 md:pt-16 pb-16 md:pb-24">
+      <h1 class="font-display font-extrabold text-5xl sm:text-6xl tracking-tight">{g.title}</h1>
+      <p class="mt-4 text-lg text-slate max-w-xl leading-relaxed">
+        {g.intro}
+      </p>
+
+      <div class="mt-8 -mx-4 px-4 overflow-x-auto" role="group" aria-label={g.filterLabel}>
+        <div class="flex gap-2 w-max">
+          {filters.map((f, i) => (
+            <button
+              type="button"
+              data-filter={f.key}
+              aria-pressed={i === 0 ? "true" : "false"}
+              class="filter whitespace-nowrap rounded-full border border-line px-4 py-2 font-medium text-slate hover:border-ink hover:text-ink aria-pressed:bg-ink aria-pressed:text-white aria-pressed:border-ink"
+            >
+              {f.label} <span class="ml-1 opacity-60 font-normal">{f.key === "all" ? photos.length : photos.filter((p) => p.category === f.key).length}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ul id="grid" class="mt-8 columns-2 md:columns-3 lg:columns-4 gap-3 [&>li]:mb-3">
+        {photos.map((p, i) => (
+          <li data-category={p.category} class="break-inside-avoid">
+            <button type="button" data-index={i} class="open block w-full overflow-hidden rounded">
+              <img src={`/assets/${p.file}`} alt={p.alt[lang]} loading="lazy" class="w-full h-auto hover:scale-[1.03] transition-transform duration-300" />
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+
+  <dialog id="lightbox" data-of={g.of} class="backdrop:bg-ink/80 bg-ink/95 p-0 max-w-none max-h-none w-screen h-[100dvh] m-0">
+    <div class="w-full h-full flex flex-col">
+      <div class="flex items-center justify-between px-4 py-3 text-white">
+        <p id="lb-caption" class="text-sm text-white/80 pr-4"></p>
+        <button type="button" id="lb-close" class="p-2 -mr-2 rounded" aria-label={g.close}>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+        </button>
+      </div>
+      <div class="flex-1 min-h-0 flex items-center justify-center gap-2 px-2 pb-6">
+        <button type="button" id="lb-prev" class="shrink-0 p-3 text-white rounded" aria-label={g.prev}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <img id="lb-img" src="" alt="" class="max-h-full max-w-full min-w-0 object-contain rounded" />
+        <button type="button" id="lb-next" class="shrink-0 p-3 text-white rounded" aria-label={g.next}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <Contact lang={lang} />
+  <Footer lang={lang} />
+</Layout>
+
+<script>
+  const items = Array.from(document.querySelectorAll<HTMLLIElement>("#grid > li"));
+  const filters = Array.from(document.querySelectorAll<HTMLButtonElement>(".filter"));
+  const dialog = document.getElementById("lightbox") as HTMLDialogElement;
+  const lbImg = document.getElementById("lb-img") as HTMLImageElement;
+  const lbCaption = document.getElementById("lb-caption")!;
+  let visible = items;
+  let current = 0;
+
+  filters.forEach((btn) =>
+    btn.addEventListener("click", () => {
+      const f = btn.dataset.filter;
+      filters.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+      items.forEach((li) => (li.hidden = f !== "all" && li.dataset.category !== f));
+      visible = items.filter((li) => !li.hidden);
+    })
+  );
+
+  const show = (i: number) => {
+    current = (i + visible.length) % visible.length;
+    const img = visible[current].querySelector("img")!;
+    lbImg.src = img.src;
+    lbImg.alt = img.alt;
+    lbCaption.textContent = `${img.alt} (${current + 1} ${dialog.dataset.of} ${visible.length})`;
+  };
+
+  items.forEach((li) =>
+    li.querySelector("button")!.addEventListener("click", () => {
+      show(visible.indexOf(li));
+      dialog.showModal();
+    })
+  );
+  document.getElementById("lb-prev")!.addEventListener("click", () => show(current - 1));
+  document.getElementById("lb-next")!.addEventListener("click", () => show(current + 1));
+  document.getElementById("lb-close")!.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("click", (e) => { if (e.target === dialog || (e.target as HTMLElement).classList.contains("flex-1")) dialog.close(); });
+  dialog.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+</script>

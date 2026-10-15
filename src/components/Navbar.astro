@@ -1,104 +1,84 @@
 ---
-import { Image } from "astro:assets";
-import logo from "/public/assets/logo-black.svg";
+import { type Lang, t, pathFor } from "../i18n";
+
+interface Props {
+  lang: Lang;
+  page?: "" | "gallery";
+}
+
+const { lang, page = "" } = Astro.props;
+const n = t(lang).nav;
+const home = pathFor(lang);
+const other: Lang = lang === "en" ? "es" : "en";
+const links = [
+  { href: `${home}#services`, label: n.services },
+  { href: `${home}#about`, label: n.about },
+  { href: pathFor(lang, "gallery"), label: n.work },
+  { href: `${home}#contact`, label: n.contact },
+];
 ---
 
-<script>
-  document.getElementById("navbar").addEventListener("click", () => {
-    document.getElementById("navbar-dropdown").classList.toggle("hidden");
-  });
-</script>
+<header class="fixed top-0 inset-x-0 z-50 bg-plaster/95 backdrop-blur border-b border-line">
+  <div class="max-w-page mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
+    <a href={home} class="flex items-center gap-2.5 shrink-0" aria-label={n.home}>
+      <img src="/assets/logo-mark.svg" alt="" width="74" height="50" class="h-[50px] w-auto" />
+      <span class="font-display font-bold text-lg leading-none tracking-tight hidden sm:inline">FF Handyman Services</span>
+    </a>
 
-<header
-  class="fixed top-0 z-50 bg-white w-full flex justify-between px-4 lg:px-8 border-b"
->
-  <a href="/"><Image src={logo} alt="logo" width="80" height="80" /></a>
-  <nav class="my-auto">
-    <ul class="gap-4 text-xl font-sans hidden md:flex">
-      <li>
-        <a href="/#" class="hover:text-neutral-500 active:text-neutral-200"
-          >Home</a
-        >
-      </li>
-      <li>
-        <a href="/#about" class="hover:text-neutral-500 active:text-neutral-200"
-          >About</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#services"
-          class="hover:text-neutral-500 active:text-neutral-200">Services</a
-        >
-      </li>
-      <li>
-        <a
-          href="/gallery"
-          class="hover:text-neutral-500 active:text-neutral-200">Gallery</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#contact"
-          class="hover:text-neutral-500 active:text-neutral-200">Contact</a
-        >
-      </li>
+    <div class="flex items-center gap-1 md:gap-7">
+      <nav aria-label={n.menu} class="hidden md:flex items-center gap-7">
+        {links.map((l) => (
+          <a href={l.href} class="text-[0.98rem] font-medium text-slate hover:text-ink">{l.label}</a>
+        ))}
+      </nav>
+      <a
+        href={pathFor(other, page)}
+        hreflang={other}
+        lang={other}
+        aria-label={n.switchAria}
+        class="lang-switch text-[0.95rem] font-semibold text-tape-ink rounded border border-line px-3 py-1.5 hover:border-tape-ink"
+      >{n.switchLabel}</a>
+      <div class="hidden md:block">
+        <a href={`${home}#contact`} class="btn btn-primary !py-2.5 !px-4 !text-[0.95rem] whitespace-nowrap">{n.estimate}</a>
+      </div>
+
+      <button
+        id="menu-toggle"
+        type="button"
+        class="md:hidden -mr-2 p-2 rounded"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <span class="sr-only">{n.menu}</span>
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path class="menu-open" d="M4 7h16M4 12h16M4 17h16" />
+          <path class="menu-close hidden" d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav id="mobile-menu" aria-label={n.menu} class="md:hidden hidden border-t border-line bg-plaster">
+    <ul class="px-4 py-2">
+      {links.map((l) => (
+        <li><a href={l.href} class="block py-3.5 text-lg font-medium border-b border-line">{l.label}</a></li>
+      ))}
     </ul>
-    <!-- Dropdown below -->
-    <ul
-      id="navbar-dropdown"
-      class="hidden absolute top-20 border w-full left-0 bg-white flex-col text-xl font-sans text-center"
-    >
-      <li class="w-fullborder-2">
-        <a
-          href="/#"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >Home</a
-        >
-      </li>
-      <li class="w-fullborder-2">
-        <a
-          href="/#about"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >About</a
-        >
-      </li>
-      <li class="w-fullborder-2">
-        <a
-          href="/#services"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >Services</a
-        >
-      </li>
-      <li class="w-fullborder-2">
-        <a
-          href="/gallery"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >Gallery</a
-        >
-      </li>
-      <li class="w-fullborder-2">
-        <a
-          href="/#contact"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >Contact</a
-        >
-      </li>
-      <li class="w-fullborder-2">
-        <a
-          href="/#gallery"
-          class="block hover:text-neutral-500 hover:bg-neutral-200 active:bg-neutral-400 active:text-white py-6"
-          >Gallery</a
-        >
-      </li>
-    </ul>
-    <div
-      id="navbar"
-      class="md:hidden flex flex-col gap-1.5 m-auto cursor-pointer"
-    >
-      <div class="border-b-2 w-6 border-black"></div>
-      <div class="border-b-2 w-6 border-black"></div>
-      <div class="border-b-2 w-6 border-black"></div>
+    <div class="px-4 pb-5 pt-2">
+      <a href={`${home}#contact`} class="btn btn-primary w-full">{n.estimateLong}</a>
     </div>
   </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById("menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+  const setOpen = (open: boolean) => {
+    menu?.classList.toggle("hidden", !open);
+    toggle?.setAttribute("aria-expanded", String(open));
+    toggle?.querySelector(".menu-open")?.classList.toggle("hidden", open);
+    toggle?.querySelector(".menu-close")?.classList.toggle("hidden", !open);
+  };
+  toggle?.addEventListener("click", () => setOpen(menu?.classList.contains("hidden") ?? false));
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+</script>

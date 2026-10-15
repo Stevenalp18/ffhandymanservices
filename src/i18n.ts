@@ -1,0 +1,213 @@
+export type Lang = "en" | "es";
+
+/** Path of the same page in a given language. Pages are "" (home) or "gallery". */
+export const pathFor = (lang: Lang, page: "" | "gallery" = "") =>
+  (lang === "es" ? "/es/" : "/") + page;
+
+export const ui = {
+  en: {
+    meta: {
+      homeTitle: "FF Handyman Services | DC, Maryland & Northern Virginia",
+      galleryTitle: "Our work | FF Handyman Services",
+      description:
+        "FF Handyman Services — repairs, painting, decks, floors, kitchens and bathrooms across DC, Maryland and Northern Virginia. Over 20 years of experience. Free estimates.",
+    },
+    nav: {
+      services: "Services",
+      about: "About",
+      work: "Our work",
+      contact: "Contact",
+      estimate: "Free estimate",
+      estimateLong: "Get a free estimate",
+      menu: "Menu",
+      home: "FF Handyman Services home",
+      switchLabel: "Español",
+      switchAria: "Ver esta página en español",
+    },
+    areas: ["Washington, DC", "Maryland", "Northern Virginia"],
+    areaLabel: "Service area",
+    hero: {
+      title: "Repairs, refreshes and remodels, done right the first time.",
+      body: "FF Handyman Services is a small crew with over 20 years in the trade. Painting, decks, floors, kitchens and bathrooms — and the small fixes in between.",
+      cta: "Get a free estimate",
+      secondary: "See our work",
+      photosLabel: "Recent projects",
+      captions: ["Kitchen remodel", "Bathroom", "Deck staining"],
+      alts: [
+        "Finished kitchen remodel with pendant lights over the island",
+        "Renovated bathroom with a new glass shower door",
+        "Deck power washed and stained",
+      ],
+    },
+    services: {
+      title: "What we do",
+      intro:
+        "Most of our work falls into five areas. If your project isn't listed, ask anyway — we take on plenty of one-off repairs.",
+      list: [
+        { name: "Painting", blurb: "Rooms, trim, siding, porches and garage floors, with the prep done properly first.", items: ["Interior", "Exterior", "Floors & garages"], alt: "Covered patio floor painted gray" },
+        { name: "Decks", blurb: "Bring a tired deck back: wash off the grime, then stain and seal it to last.", items: ["Power washing", "Staining", "Sealing & resealing"], alt: "Deck power washed and stained" },
+        { name: "Floors", blurb: "New hardwood or carpet, and refinishing floors that already have good bones.", items: ["Hardwood", "Carpet", "Staining"], alt: "New wood flooring in a basement" },
+        { name: "Kitchens", blurb: "From repainting cabinets to a new backsplash or a full renovation.", items: ["Cabinets", "Backsplash", "Installation", "Renovation"], alt: "Kitchen cabinets repainted white" },
+        { name: "Bathrooms", blurb: "Tile, fixtures and vanities, or a complete gut-and-redo.", items: ["Tile", "Fixtures & vanities", "Renovation"], alt: "Renovated bathroom" },
+      ],
+      itemsLabel: (name: string) => `${name} services`,
+      elseTitle: "Everything else",
+      elseBody: "Drywall patches, doors that stick, fixtures to hang, a basement to finish. Tell us what you need.",
+      elseCta: "Describe your project",
+    },
+    about: {
+      title: "A small crew that treats your house like it's ours.",
+      p1: "We've been keeping homes in good shape for more than 20 years — fixing what's broken, maintaining what's working, and renovating the rooms you're ready to change.",
+      p2: "You talk to the people doing the work, not a call center. We show up when we say we will, keep the job site clean, and don't call it finished until it looks right.",
+      p3: "Every estimate is free, whether it's a leaky faucet or a full basement.",
+      recent: "Recent jobs",
+      seeAll: "See the full gallery",
+      stripAlts: [
+        "Exterior painting on a two-story brick home",
+        "Kitchen with new white cabinets and tile backsplash",
+        "Interior painting and flooring",
+        "Deck staining",
+        "Bathroom renovation",
+      ],
+    },
+    contact: {
+      title: "Get a free estimate",
+      sub: "Serving Washington, DC, Maryland and Northern Virginia.",
+      steps: [
+        { title: "Tell us about the job", body: "A few lines is enough. Photos help, and we can ask for them by email." },
+        { title: "We get back to you", body: "We'll reply with questions or set a time to take a look in person." },
+        { title: "You get a free estimate", body: "A clear price before any work starts. No obligation." },
+      ],
+      subject: "New estimate request from the website",
+      name: "Name",
+      email: "Email",
+      phone: "Phone",
+      optional: "(optional)",
+      type: "Type of project",
+      options: ["Painting", "Decks", "Floors", "Kitchen", "Bathroom", "Repair or something else"],
+      message: "What do you need done?",
+      placeholder: "e.g. Repaint two bedrooms and the hallway, plus fix a door that sticks.",
+      submit: "Request my estimate",
+      privacy: "We only use your details to reply about this project.",
+    },
+    footer: {
+      areas: "DC · Maryland · Northern Virginia",
+      siteBy: "Site by",
+    },
+    gallery: {
+      title: "Our work",
+      intro: "Photos from real jobs around the DMV, taken by our crew. Tap any photo to see it larger.",
+      filterLabel: "Filter photos",
+      all: "All",
+      categories: { interior: "Interior", exterior: "Exterior & decks", kitchens: "Kitchens", bathrooms: "Bathrooms" },
+      close: "Close",
+      prev: "Previous photo",
+      next: "Next photo",
+      of: "of",
+    },
+  },
+
+  es: {
+    meta: {
+      homeTitle: "FF Handyman Services | DC, Maryland y el norte de Virginia",
+      galleryTitle: "Nuestros trabajos | FF Handyman Services",
+      description:
+        "FF Handyman Services — reparaciones, pintura, decks, pisos, cocinas y baños en DC, Maryland y el norte de Virginia. Más de 20 años de experiencia. Presupuestos gratis.",
+    },
+    nav: {
+      services: "Servicios",
+      about: "Nosotros",
+      work: "Trabajos",
+      contact: "Contacto",
+      estimate: "Presupuesto gratis",
+      estimateLong: "Pida su presupuesto gratis",
+      menu: "Menú",
+      home: "Inicio de FF Handyman Services",
+      switchLabel: "English",
+      switchAria: "View this page in English",
+    },
+    areas: ["Washington, DC", "Maryland", "Norte de Virginia"],
+    areaLabel: "Zona de servicio",
+    hero: {
+      title: "Reparaciones, renovaciones y remodelaciones bien hechas desde la primera vez.",
+      body: "FF Handyman Services es un equipo pequeño con más de 20 años en el oficio. Pintura, decks, pisos, cocinas y baños, y también los arreglos pequeños.",
+      cta: "Pida su presupuesto gratis",
+      secondary: "Vea nuestros trabajos",
+      photosLabel: "Proyectos recientes",
+      captions: ["Remodelación de cocina", "Baño", "Teñido de deck"],
+      alts: [
+        "Cocina remodelada con lámparas colgantes sobre la isla",
+        "Baño renovado con nueva puerta de ducha de vidrio",
+        "Deck lavado a presión y teñido",
+      ],
+    },
+    services: {
+      title: "Lo que hacemos",
+      intro:
+        "Casi todo nuestro trabajo está en estas cinco áreas. Si su proyecto no aparece, pregúntenos igual: hacemos muchas reparaciones sueltas.",
+      list: [
+        { name: "Pintura", blurb: "Cuartos, molduras, siding, porches y pisos de garaje, siempre con buena preparación primero.", items: ["Interior", "Exterior", "Pisos y garajes"], alt: "Piso de patio techado pintado de gris" },
+        { name: "Decks", blurb: "Recupere su deck: lo lavamos a fondo y luego lo teñimos y sellamos para que dure.", items: ["Lavado a presión", "Teñido", "Sellado y resellado"], alt: "Deck lavado a presión y teñido" },
+        { name: "Pisos", blurb: "Madera nueva o alfombra, y restauración de pisos que todavía están en buen estado.", items: ["Madera", "Alfombra", "Teñido"], alt: "Piso de madera nuevo en un sótano" },
+        { name: "Cocinas", blurb: "Desde pintar gabinetes hasta un backsplash nuevo o una remodelación completa.", items: ["Gabinetes", "Backsplash", "Instalación", "Remodelación"], alt: "Gabinetes de cocina pintados de blanco" },
+        { name: "Baños", blurb: "Azulejos, accesorios y muebles de baño, o una renovación completa.", items: ["Azulejos", "Accesorios y muebles", "Remodelación"], alt: "Baño renovado" },
+      ],
+      itemsLabel: (name: string) => `Servicios de ${name.toLowerCase()}`,
+      elseTitle: "Todo lo demás",
+      elseBody: "Parches de drywall, puertas que se traban, lámparas para colgar, un sótano por terminar. Cuéntenos qué necesita.",
+      elseCta: "Describa su proyecto",
+    },
+    about: {
+      title: "Un equipo pequeño que cuida su casa como si fuera la nuestra.",
+      p1: "Llevamos más de 20 años manteniendo casas en buen estado: arreglamos lo que está roto, cuidamos lo que funciona y renovamos los espacios que usted quiere cambiar.",
+      p2: "Usted habla con las personas que hacen el trabajo, no con un centro de llamadas. Llegamos cuando decimos, dejamos el área limpia y no damos el trabajo por terminado hasta que quede bien.",
+      p3: "Todos los presupuestos son gratis, sea una llave que gotea o un sótano completo.",
+      recent: "Trabajos recientes",
+      seeAll: "Ver toda la galería",
+      stripAlts: [
+        "Pintura exterior de una casa de ladrillo de dos pisos",
+        "Cocina con gabinetes blancos nuevos y backsplash de azulejo",
+        "Pintura interior y pisos",
+        "Teñido de deck",
+        "Renovación de baño",
+      ],
+    },
+    contact: {
+      title: "Pida su presupuesto gratis",
+      sub: "Atendemos Washington, DC, Maryland y el norte de Virginia.",
+      steps: [
+        { title: "Cuéntenos sobre el trabajo", body: "Unas pocas líneas son suficientes. Las fotos ayudan y se las podemos pedir por correo." },
+        { title: "Le respondemos", body: "Le escribimos con preguntas o acordamos un día para verlo en persona." },
+        { title: "Recibe su presupuesto gratis", body: "Un precio claro antes de empezar. Sin compromiso." },
+      ],
+      subject: "Nueva solicitud de presupuesto desde el sitio (español)",
+      name: "Nombre",
+      email: "Correo electrónico",
+      phone: "Teléfono",
+      optional: "(opcional)",
+      type: "Tipo de proyecto",
+      options: ["Pintura", "Decks", "Pisos", "Cocina", "Baño", "Reparación u otro"],
+      message: "¿Qué necesita?",
+      placeholder: "Ej.: Pintar dos cuartos y el pasillo, y arreglar una puerta que se traba.",
+      submit: "Solicitar presupuesto",
+      privacy: "Solo usamos sus datos para responderle sobre este proyecto.",
+    },
+    footer: {
+      areas: "DC · Maryland · Norte de Virginia",
+      siteBy: "Sitio por",
+    },
+    gallery: {
+      title: "Nuestros trabajos",
+      intro: "Fotos de trabajos reales en el área del DMV, tomadas por nuestro equipo. Toque una foto para verla más grande.",
+      filterLabel: "Filtrar fotos",
+      all: "Todas",
+      categories: { interior: "Interiores", exterior: "Exteriores y decks", kitchens: "Cocinas", bathrooms: "Baños" },
+      close: "Cerrar",
+      prev: "Foto anterior",
+      next: "Foto siguiente",
+      of: "de",
+    },
+  },
+} as const;
+
+export const t = (lang: Lang) => ui[lang];

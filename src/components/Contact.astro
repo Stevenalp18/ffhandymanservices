@@ -1,64 +1,69 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../../public/assets/logo-black.svg";
+import { type Lang, t, ui } from "../i18n";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const c = t(lang).contact;
+// Emails always carry the English option name so requests read the same either way.
+const optionValues = ui.en.contact.options;
+const field =
+  "w-full rounded border border-line bg-plaster px-3.5 py-3 text-base text-ink placeholder:text-slate/60 focus:outline-none focus:border-tape-ink focus:ring-2 focus:ring-tape/40";
 ---
 
-<section id="contact" class="border-b">
-  <div
-    class="text-center mt-36 mb-32 md:mb-48 py-10 border-2 border-neutral-300/50 p-10 w-4/5 md:w-4/5 xl:w-3/5 mx-auto rounded-md flex md:flex-row flex-col justify-center md:justify-around"
-  >
-    <div class="md:w-1/2 text-center md:text-left px-2">
-      <h2 class="text-4xl font-bold mb-4">Get in touch.</h2>
-      <p class="mb-4">
-        With over 20 years of experience, we strive to do the best work!
-      </p>
-      <p>Reach out so we can get you a free estimate today!</p>
-      <Image src={logo} alt="logo" width={200} height={200} class="mx-auto" />
+<section id="contact" class="bg-ink text-white">
+  <div class="max-w-page mx-auto px-4 md:px-6 py-16 md:py-24 grid lg:grid-cols-[0.85fr_1.15fr] gap-12 lg:gap-16">
+    <div>
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight leading-[1.05]" style="text-wrap: balance">{c.title}</h2>
+      <p class="mt-4 text-lg text-white/75 leading-relaxed max-w-md">{c.sub}</p>
+      <ol class="mt-10 space-y-7">
+        {c.steps.map((s, i) => (
+          <li class="flex gap-4">
+            <span class="font-display font-bold text-lg w-9 h-9 shrink-0 rounded-full bg-tape text-ink grid place-items-center" aria-hidden="true">{i + 1}</span>
+            <div>
+              <h3 class="font-semibold text-lg">{s.title}</h3>
+              <p class="text-white/70 leading-relaxed">{s.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
-    <div class="md:w-1/2">
-      <form
-        action="https://formsubmit.co/a6380b60613942416bb7756e02f979df"
-        method="POST"
-        class="flex flex-col gap-8"
-      >
-        <label class="w-full" for=""
-          ><input
-            required
-            type="text"
-            name="name"
-            placeholder="Name"
-            class="w-full rounded-sm p-2 bg-neutral-200"
-          /></label
-        >
-        <label class="w-full" for=""
-          ><input
-            placeholder="Email"
-            type="email"
-            name="email"
-            required
-            class="w-full rounded-sm p-2 bg-neutral-200"
-          /></label
-        >
-        <label class="w-full" for=""
-          ><input
-            type="tel"
-            name="telephone"
-            placeholder="Phone"
-            class="w-full rounded-sm p-2 bg-neutral-200"
-          /></label
-        >
-        <label for="w-full"
-          ><textarea
-            placeholder="Message"
-            required
-            class="w-full rounded-sm p-2 bg-neutral-200"></textarea></label
-        >
-        <input
-          type="submit"
-          value="Send Message"
-          class="bg-blue-600 p-2 w-36 rounded-md text-white text-lg hover:cursor-pointer hover:bg-blue-400 active:bg-green-300 active:text-neutral-700"
-        />
-      </form>
-    </div>
+
+    <form
+      action="https://formsubmit.co/a6380b60613942416bb7756e02f979df"
+      method="POST"
+      class="bg-white text-ink rounded-md p-6 sm:p-8 grid sm:grid-cols-2 gap-5 relative"
+    >
+      <span class="tape -top-3 right-10 rotate-[4deg]" aria-hidden="true"></span>
+      <input type="hidden" name="_subject" value={c.subject} />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="language" value={lang === "es" ? "Spanish" : "English"} />
+
+      <div class="sm:col-span-2">
+        <label for="name" class="block font-medium mb-1.5">{c.name}</label>
+        <input id="name" name="name" type="text" autocomplete="name" required class={field} />
+      </div>
+      <div>
+        <label for="email" class="block font-medium mb-1.5">{c.email}</label>
+        <input id="email" name="email" type="email" autocomplete="email" required class={field} />
+      </div>
+      <div>
+        <label for="phone" class="block font-medium mb-1.5">{c.phone} <span class="text-slate font-normal">{c.optional}</span></label>
+        <input id="phone" name="telephone" type="tel" autocomplete="tel" class={field} />
+      </div>
+      <div class="sm:col-span-2">
+        <label for="service" class="block font-medium mb-1.5">{c.type}</label>
+        <select id="service" name="service" class={field}>
+          {c.options.map((o, i) => <option value={optionValues[i]}>{o}</option>)}
+        </select>
+      </div>
+      <div class="sm:col-span-2">
+        <label for="message" class="block font-medium mb-1.5">{c.message}</label>
+        <textarea id="message" name="message" rows="5" required placeholder={c.placeholder} class={field}></textarea>
+      </div>
+      <div class="sm:col-span-2 flex flex-wrap items-center gap-4">
+        <button type="submit" class="btn btn-primary">{c.submit}</button>
+        <p class="text-sm text-slate">{c.privacy}</p>
+      </div>
+    </form>
   </div>
 </section>

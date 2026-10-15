@@ -1,0 +1,25 @@
+---
+import type { Lang } from "../i18n";
+import { t } from "../i18n";
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+---
+
+<Layout title={t(lang).meta.homeTitle} lang={lang}>
+  <Navbar lang={lang} />
+  <main id="main">
+    <Hero lang={lang} />
+    <Services lang={lang} />
+    <About lang={lang} />
+    <Contact lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</Layout>

@@ -1,35 +1,88 @@
 ---
+import { type Lang, t, pathFor } from "../i18n";
+
 interface Props {
   title: string;
+  lang: Lang;
+  page?: "" | "gallery";
 }
 
-const { title } = Astro.props;
+const { title, lang, page = "" } = Astro.props;
+const description = t(lang).meta.description;
+const skip = lang === "es" ? "Ir al contenido" : "Skip to content";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Astro description" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/assets/kitchen-remodel-1.jpeg" />
+    <meta name="theme-color" content="#F5F6F4" />
+    <link rel="icon" type="image/svg+xml" href="/assets/logo-black.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Young+Serif&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="alternate" hreflang="en" href={pathFor("en", page)} />
+    <link rel="alternate" hreflang="es" href={pathFor("es", page)} />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-plaster text-ink font-sans antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:bg-ink focus:text-white focus:px-4 focus:py-2 focus:rounded"
+      >{skip}</a
+    >
     <slot />
   </body>
 </html>
 
 <style is:global>
   html {
-    background-color: #faf9f6;
-    box-sizing: border-box;
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+  :focus-visible {
+    outline: 3px solid #3d8bdb;
+    outline-offset: 3px;
+  }
+  /* A strip of painter's tape. Ragged ends come from the clip-path. */
+  .tape {
+    position: absolute;
+    width: 6.5rem;
+    height: 1.6rem;
+    background: rgba(61, 139, 219, 0.88);
+    box-shadow: 0 1px 2px rgba(29, 42, 48, 0.18);
+    clip-path: polygon(
+      2% 8%, 6% 0, 10% 10%, 14% 2%, 86% 0, 90% 9%, 94% 1%, 98% 10%,
+      100% 92%, 95% 100%, 91% 90%, 87% 100%, 12% 100%, 8% 91%, 4% 100%, 0 90%
+    );
+    z-index: 2;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.375rem;
+    padding: 0.85rem 1.35rem;
+    font-weight: 600;
+    font-size: 1.0625rem;
+    line-height: 1;
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+  }
+  .btn-primary { background: #1e61ab; color: #fff; }
+  .btn-primary:hover { background: #174f8d; }
+  .btn-quiet { border: 1.5px solid #1d2a30; color: #1d2a30; }
+  .btn-quiet:hover { background: #1d2a30; color: #fff; }
 </style>

@@ -1,126 +1,50 @@
 ---
-import { Image } from "astro:assets";
-import deckImage from "/public/assets/deck-work-1.jpeg";
-import basementFloor from "/public/assets/basement-floor-1.jpeg";
-import bathroomRenovation from "/public/assets/bathroom-renovation-1.jpeg";
-import kitchenRenovation from "/public/assets/kitchen-remodel-1.jpeg";
-import patioPainting from "/public/assets/patio-paint.jpeg";
+import { type Lang, t } from "../i18n";
+
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const s = t(lang).services;
+const images = [
+  "/assets/patio-paint.jpeg",
+  "/assets/deck-work-1.jpeg",
+  "/assets/basement-floor-1.jpeg",
+  "/assets/kitchen-remodel-3.jpeg",
+  "/assets/bathroom-renovation-1.jpeg",
+];
 ---
 
-<section class="" id="services">
-  <div class="p-8 lg:w-3/4 mx-auto flex flex-col gap-6">
-    <div>
-      <h2 class="text-4xl font-['Young_Serif'] text-center">Our Services!</h2>
-      <p class="text-center text-neutral-600">Check what we have to offer!</p>
+<section id="services" class="bg-white border-y border-line">
+  <div class="max-w-page mx-auto px-4 md:px-6 py-16 md:py-24">
+    <div class="max-w-2xl">
+      <h2 class="font-display font-bold text-4xl sm:text-5xl tracking-tight">{s.title}</h2>
+      <p class="mt-4 text-lg text-slate leading-relaxed">{s.intro}</p>
     </div>
-    <div class="flex gap-4 flex-col md:flex-row flex-wrap">
-      <!-- Break -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">Decks</h3>
-          <ul class="text-xl">
-            <li class="overline">Staining</li>
-            <li>Powerwashing</li>
-            <li>Sealing/Resealing</li>
-          </ul>
+
+    <ul class="mt-12 grid md:grid-cols-2 gap-x-12">
+      {s.list.map((item, i) => (
+        <li class="flex gap-5 py-7 border-t border-line">
+          <img src={images[i]} alt={item.alt} loading="lazy" class="w-24 h-24 sm:w-32 sm:h-32 object-cover rounded shrink-0" />
+          <div class="min-w-0">
+            <h3 class="font-display font-bold text-2xl tracking-tight">{item.name}</h3>
+            <p class="mt-1.5 text-slate leading-relaxed">{item.blurb}</p>
+            <ul class="mt-3 flex flex-wrap gap-1.5" aria-label={s.itemsLabel(item.name)}>
+              {item.items.map((x) => (
+                <li class="text-sm font-medium bg-mist rounded px-2.5 py-1">{x}</li>
+              ))}
+            </ul>
+          </div>
+        </li>
+      ))}
+      <li class="flex gap-5 py-7 border-t border-line">
+        <div class="w-24 h-24 sm:w-32 sm:h-32 rounded shrink-0 border-2 border-dashed border-line grid place-items-center text-slate" aria-hidden="true">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3.6 17.4a1.9 1.9 0 1 0 2.7 2.7l5.7-5.7a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.3-.3-2.4z"/></svg>
         </div>
-        <Image
-          src={deckImage}
-          alt="Deck cleaned, prepped, power washed, and stained"
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-      <!--  -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">Floors</h3>
-          <ul class="text-xl">
-            <li class="overline">Staining</li>
-            <li>Hardwood Floors</li>
-            <li>Carpets</li>
-          </ul>
+        <div class="min-w-0">
+          <h3 class="font-display font-bold text-2xl tracking-tight">{s.elseTitle}</h3>
+          <p class="mt-1.5 text-slate leading-relaxed">{s.elseBody}</p>
+          <a href="#contact" class="inline-block mt-3 font-semibold text-tape-ink underline underline-offset-4 decoration-2 hover:decoration-tape">{s.elseCta}</a>
         </div>
-        <Image
-          src={basementFloor}
-          alt="Changed the basement wooden floors"
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-      <!--  -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">Bathrooms</h3>
-          <ul class="text-xl">
-            <li class="overline">Renovation</li>
-            <li>Installation</li>
-            <li>Tiles</li>
-          </ul>
-        </div>
-        <Image
-          src={bathroomRenovation}
-          alt="Renovated the bathroom completely"
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-      <!--  -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">Kitchens</h3>
-          <ul class="text-xl">
-            <li class="overline">Installation</li>
-            <li>Renovation</li>
-            <li>Backsplash</li>
-            <li>Cabinets</li>
-          </ul>
-        </div>
-        <Image
-          src={kitchenRenovation}
-          alt="Cabinets Repainted in kitchen"
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-      <!--  -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">Painting</h3>
-          <ul class="text-xl">
-            <li class="overline">Interior Painting</li>
-            <li>Exterior Painting</li>
-            <li>Floor/Garage</li>
-          </ul>
-        </div>
-        <Image
-          src={patioPainting}
-          alt="Patio Painted in gray"
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-      <!--  -->
-      <div class="flex flex-col-reverse gap-2 justify-center mx-auto">
-        <div class="w-full text-left md:text-center my-auto">
-          <h3 class="text-2xl font-['Young_Serif']">More</h3>
-          <ul class="text-xl">
-            <li class="overline">Contact us!</li>
-          </ul>
-        </div>
-        <Image
-          src={deckImage}
-          alt=""
-          width="300"
-          height="300"
-          class="rounded-xl"
-        />
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </section>

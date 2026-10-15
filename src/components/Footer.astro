@@ -1,21 +1,32 @@
 ---
+import { type Lang, t, pathFor } from "../i18n";
 
+interface Props { lang: Lang }
+const { lang } = Astro.props;
+const { nav, footer } = t(lang);
+const home = pathFor(lang);
+const year = new Date().getFullYear();
 ---
 
-<footer class="p-4">
-  <nav>
-    <ul class="flex gap-6 justify-center text-lg">
-      <li><a href="#" class="hover:underline">Home</a></li>
-      <li><a href="#about" class="hover:underline">About</a></li>
-      <li><a href="#services" class="hover:underline">Services</a></li>
-      <li><a href="#contact" class="hover:underline">Contact</a></li>
-    </ul>
-    <div class="text-center mt-4 px-4 text-neutral-600">
-      created by <a
-        href="https://stevenalp.com"
-        target="_blank"
-        class="hover:underline">Steven</a
-      > with TailwindCSS, Astro, and React
+<footer class="bg-ink text-white/70 border-t border-white/10">
+  <div class="max-w-page mx-auto px-4 md:px-6 py-10 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+    <div class="flex items-center gap-3">
+      <img src="/assets/logo-mark.svg" alt="" width="74" height="50" class="h-[50px] w-auto invert" />
+      <div>
+        <p class="text-white font-display font-bold">FF Handyman Services</p>
+        <p class="text-sm">{footer.areas}</p>
+      </div>
     </div>
-  </nav>
+    <nav aria-label="Footer">
+      <ul class="flex flex-wrap gap-x-6 gap-y-2">
+        <li><a href={`${home}#services`} class="hover:text-white">{nav.services}</a></li>
+        <li><a href={`${home}#about`} class="hover:text-white">{nav.about}</a></li>
+        <li><a href={pathFor(lang, "gallery")} class="hover:text-white">{nav.work}</a></li>
+        <li><a href={`${home}#contact`} class="hover:text-white">{nav.contact}</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="max-w-page mx-auto px-4 md:px-6 pb-8 text-sm text-white/50">
+    © {year} FF Handyman Services. {footer.siteBy} <a href="https://stevenalp.com" target="_blank" rel="noopener" class="underline underline-offset-2 hover:text-white">Helix Web Solutions</a>.
+  </div>
 </footer>
